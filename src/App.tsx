@@ -14,18 +14,16 @@ import Album from './components/Albums/Album';
 const App: React.FC = () => 
 {
   const contentToBeRendered:JSX.Element[] = [];
-           
-  for (const key in discography) 
+
+  discography.forEach(element => 
   {
-    if (Object.prototype.hasOwnProperty.call(discography, key)) 
-    {
-      contentToBeRendered.push
+    contentToBeRendered.push
       (
         <h4 style={{
           textAlign: 'center',  
           display: 'block'}}
-          key={key+"h4"}>
-            <small>{key}</small>
+          key={element.band+"h4"}>
+            <small>{element.band}</small>
         </h4>,
 
         <hr style={{
@@ -35,19 +33,19 @@ const App: React.FC = () =>
           height: 1,
           width: '50%'
         }}
-        key={key+"hr"}/>,
+        key={element.band+"hr"}/>,
 
-        <div className={(discography[key].length < 4)? 'row justify-content-center' : 'row'} key={key+"row"}>
-          {
-              discography[key].map((album: AlbumDetail) =>
-                  <Album
-                  album= {album}
-                  />)
-          }
+        <div className={(element.albums.length < 4)? 'row justify-content-center' : 'row'} key={element.band+"row"}>
+        {
+            element.albums.map((album: AlbumDetail) =>
+                <Album
+                album= {album}
+                key={album.title}
+                />)
+        }
         </div>
       );
-    }
-  }
+  });
 
   return (
     <Container>
