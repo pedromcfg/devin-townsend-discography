@@ -1,5 +1,3 @@
-//REACT
-import React from 'react';
 //BOOTSTRAP
 import { Row } from 'react-bootstrap';
 //IMAGES

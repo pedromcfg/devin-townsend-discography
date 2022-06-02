@@ -1,5 +1,5 @@
 import React, {ReactElement,  ReactNode, useState } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import albumCovers from './AlbumCovers';
 //INTERFACES
 import { AlbumDetail } from '../discography';
