@@ -203,19 +203,21 @@ h6 {
   background-color: rgba(210,130,240, 0.0);
 }
 
+
 .rtf--ab
 {
   background-color: whitesmoke;
   color: black;
-  font-family: 'Overlock';
-  font-size: '20px';
+  font-size: '10px';
+  border-radius: 0px 0px 0px 0px;
+  width: auto;
+  padding: 10px 10px;
 }
 .rtf--ab:hover
 {
   background-color: rgba(20, 180, 220, 0.5);
   color: whitesmoke;
-  font-family: 'Overlock';
-  font-size: '20px';
+  font-size: '10px';
 }
 .rtf--ab:focus
 {
@@ -225,3 +227,4 @@ h6 {
   color: whitesmoke;
   border: rgba(0, 0, 0, 0.5) solid 2px;
 }
+

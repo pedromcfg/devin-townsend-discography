@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap';
 import { Fab, Action } from 'react-tiny-fab';
 //FONT AWESOME
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEye, faSortUp, faSortDown, faCalendarDays } from '@fortawesome/free-solid-svg-icons'
+import {faEye, faCalendarDays, faFilter, faFilterCircleXmark,faArrowDownShortWide, faArrowUpShortWide } from '@fortawesome/free-solid-svg-icons'
 //OBJECTS
 import { AlbumDetail, discography } from './components/discography';
 //CSS
@@ -27,6 +27,10 @@ interface GroupBy
 const App: React.FC = () => 
 {
   const contentToBeRendered:JSX.Element[] = [];
+
+  //gather the unique names of bands
+  const bands:string[] = discography.map(item => item.band)
+                                    .filter((value, index, self) => self.indexOf(value) === index).sort();
   
   /* const "order" will decide if what is presented in each group is
   ascending or descending */
@@ -37,19 +41,36 @@ const App: React.FC = () =>
   /* const "byYear" will decide if what is presented is grouped by year */
   const [byYear, setByYear] = useState(false);
 
+  /* const "byYear" will decide if what is presented is grouped by year */
+  const [filter, setFilter] = useState("");
+
   let groupedBy:GroupBy;
+  
+  //the default option    orderDescription starts as "asc"
+  groupedBy = _.mapValues(_.groupBy(discography, function(item) {
+                  return item.band;
+                }), 
+                sort => _.orderBy(sort, ['dateRelease'], [orderDescription]));
+  
+
+  //if group by release year is clicked
   if(byYear)
     groupedBy = _.mapValues(_.groupBy(discography, function(item) {
-                      return item.dateRelease.getFullYear();
-                    }), 
-                    sort => _.orderBy(sort, ['dateRelease'], [orderDescription]));
-  else
-    groupedBy = _.mapValues(_.groupBy(discography, function(item) {
-                      return item.band;
-                    }), 
-                    sort => _.orderBy(sort, ['dateRelease'], [orderDescription]));
+                    return item.dateRelease.getFullYear();
+                  }), 
+                  sort => _.orderBy(sort, ['dateRelease'], [orderDescription]));
+  if(filter)
+      groupedBy =  _.pickBy(groupedBy, function(value, key) {
+        return key === filter;
+      });
 
-                    console.log(groupedBy)
+  //order keys of groups alphabetically
+  groupedBy = Object.keys(groupedBy).sort().reduce(
+    (obj:GroupBy, key) => 
+    { 
+      obj[key] = groupedBy[key]; 
+      return obj;
+    }, {});
   
   //This is where contentToBeRendered gets filled with content               
   for (const key in groupedBy) 
@@ -115,15 +136,48 @@ const App: React.FC = () =>
                         fontSize: '20px'}}
         icon={<FontAwesomeIcon icon={faEye} />}>
         <Action
-          className='floatingButton'
+          style={{fontSize: '12px'}}
           onClick={() => setOrder(!order)}>
-          {order? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+            <p>
+            Release date {order? <FontAwesomeIcon icon={faArrowDownShortWide} className='fontawesomeicon'/> : <FontAwesomeIcon icon={faArrowUpShortWide} />}
+            </p>
         </Action>
         <Action
-          className='floatingButton'
+          style={{fontSize: '12px'}}
           onClick={() => setByYear(!byYear)}>
-          <FontAwesomeIcon icon={faCalendarDays} />
+          <p>
+          Group by release year <FontAwesomeIcon icon={faCalendarDays} />
+          </p>
         </Action>
+      </Fab>
+
+      <Fab
+        style={{ bottom: 200, right: 0}}
+        event="hover"
+        alwaysShowTitle={true}
+        mainButtonStyles={{
+                            backgroundColor: "whitesmoke",
+                            color: 'black',
+                          fontFamily: 'Overlock',
+                        fontSize: '20px'}}
+        icon={<FontAwesomeIcon icon={faFilter} />}>
+        {bands.map(band => 
+        <Action
+          style={{fontSize: '15px', fontFamily:'Overlock'}}
+          onClick={() => setFilter(band)}
+          key={band}>
+          <p>
+           {band}
+          </p>
+        </Action>)}
+        <Action
+          style={{fontSize: '15px', fontFamily:'Overlock'}}
+          onClick={() => setFilter("")}>
+          <p>
+           <FontAwesomeIcon icon={faFilterCircleXmark} /> Clear Filter
+          </p>
+        </Action>
+        
       </Fab>
 
     </Container>
