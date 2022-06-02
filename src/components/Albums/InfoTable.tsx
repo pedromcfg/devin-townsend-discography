@@ -28,6 +28,11 @@ const InfoTable: React.FC<{album: AlbumDetail}> = ({album}): ReactElement  => {
                                                                     })}
                     </td>
                 </tr>}
+                {album.studio && <tr key="studio">
+                <th>Studio</th>
+                    <td>{album.studio}
+                    </td>
+                </tr>}
                 
                 <tr key="modalGenre">
                 <th>Genre(s)</th>

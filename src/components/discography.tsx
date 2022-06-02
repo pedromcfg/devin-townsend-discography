@@ -4,7 +4,7 @@ interface Band
     albums: AlbumDetail[];
 }
 
-interface Track
+export interface Track
 {
     trackTitle: string;
     trackLength: string;
