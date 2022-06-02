@@ -8,22 +8,11 @@ import albumCovers from './AlbumCovers';
 import InfoTable from './InfoTable';
 
 
-const Album: React.FC<AlbumDetail> = ({...props}): ReactElement => 
+const Album: React.FC<{album: AlbumDetail}> = ({album}): ReactElement => 
 {
+
   //album info to be presented in modal
-  let contentToBeRenderedInModal: JSX.Element = <InfoTable title= {props.title}
-                                                    type= {props.type}
-                                                    band= {props.band}
-                                                    dateRecorded= {props.dateRecorded}
-                                                    dateRelease= {props.dateRelease}
-                                                    studio= {props.studio}
-                                                    genre= {props.genre}
-                                                    length= {props.length}
-                                                    label= {props.label}
-                                                    producer= {props.producer}
-                                                    imgCovername= {props.imgCovername}
-                                                    tracks= {props.tracks}
-                                                    key={props.title+"modal"}/>
+  let contentToBeRenderedInModal: JSX.Element = <InfoTable album= {album}/>
 
   //for the modal
   const [show, setShow] = useState(false);
@@ -42,7 +31,7 @@ const Album: React.FC<AlbumDetail> = ({...props}): ReactElement =>
       {/* THE MODAL */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton className="text-center">
-          <Modal.Title className='w-100'>{props.title} ({props.dateRelease.getFullYear()})</Modal.Title>
+          <Modal.Title className='w-100'>{album.title} ({album.dateRelease.getFullYear()})</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="table-responsive">
@@ -57,13 +46,13 @@ const Album: React.FC<AlbumDetail> = ({...props}): ReactElement =>
       </Modal>
 
       <Image 
-        src={albumCovers[props.imgCovername]}
+        src={albumCovers[album.imgCovername]}
         className="btn img-rounded center-block img-fluid" 
         onClick={handleShow} 
-        alt={props.imgCovername}/>
+        alt={album.imgCovername}/>
 
       <div className="text-center">
-        <h6>{props.title}<small> ({props.dateRelease.getFullYear()})</small></h6>
+        <h6>{album.title}<small> ({album.dateRelease.getFullYear()})</small></h6>
       </div>
         
       <div className="text-center">
@@ -78,7 +67,7 @@ const Album: React.FC<AlbumDetail> = ({...props}): ReactElement =>
           <div className="well">
             <Table variant="dark table-striped">
               <tbody>
-                {props.tracks.map((track,index) => 
+                {album.tracks.map((track,index) => 
                   <tr key={track.trackTitle}>
                     <td>{index+1}</td>
                     <td>{track.trackTitle}</td>
