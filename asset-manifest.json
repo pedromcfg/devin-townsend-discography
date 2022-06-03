@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/devin-townsend-discography/static/css/main.89160fdb.css",
-    "main.js": "/devin-townsend-discography/static/js/main.e69b98dc.js",
+    "main.js": "/devin-townsend-discography/static/js/main.474ddfb8.js",
     "static/js/787.214d6867.chunk.js": "/devin-townsend-discography/static/js/787.214d6867.chunk.js",
     "static/media/wallpaper.png": "/devin-townsend-discography/static/media/wallpaper.79d4b2f172fe695934e7.png",
     "static/media/devin.png": "/devin-townsend-discography/static/media/devin.ad75551576c7b47a151e.png",
@@ -34,11 +34,11 @@
     "static/media/1994-2006_Chaos_Years.jpg": "/devin-townsend-discography/static/media/1994-2006_Chaos_Years.f7835e1d69b1177ad1a2.jpg",
     "index.html": "/devin-townsend-discography/index.html",
     "main.89160fdb.css.map": "/devin-townsend-discography/static/css/main.89160fdb.css.map",
-    "main.e69b98dc.js.map": "/devin-townsend-discography/static/js/main.e69b98dc.js.map",
+    "main.474ddfb8.js.map": "/devin-townsend-discography/static/js/main.474ddfb8.js.map",
     "787.214d6867.chunk.js.map": "/devin-townsend-discography/static/js/787.214d6867.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.89160fdb.css",
-    "static/js/main.e69b98dc.js"
+    "static/js/main.474ddfb8.js"
   ]
 }
