@@ -10,7 +10,6 @@ import './App.css';
 import Header from './components/Header/Header';
 import Album from './components/Albums/Album';
 
-
 const App: React.FC = () => 
 {
   const contentToBeRendered:JSX.Element[] = [];
@@ -19,30 +18,12 @@ const App: React.FC = () =>
   {
     contentToBeRendered.push
       (
-        <h4 style={{
-          textAlign: 'center',  
-          display: 'block'}}
-          key={element.band+"h4"}>
+        <h4 style={{textAlign: 'center', display: 'block'}} key={element.band+"h4"}>
             <small>{element.band}</small>
         </h4>,
-
-        <hr style={{
-          margin: 'auto',
-          marginBottom: '30px',
-          color: 'white',
-          height: 1,
-          width: '50%'
-        }}
-        key={element.band+"hr"}/>,
-
+        <hr style={{margin: 'auto',marginBottom: '30px',color: 'white',height: 1,width: '50%'}} key={element.band+"hr"}/>,
         <div className={(element.albums.length < 4)? 'row justify-content-center' : 'row'} key={element.band+"row"}>
-        {
-            element.albums.map((album: AlbumDetail) =>
-                <Album
-                album= {album}
-                key={album.title}
-                />)
-        }
+          {element.albums.map((album: AlbumDetail) => <Album album= {album} key={album.title} />)}
         </div>
       );
   });
